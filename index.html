@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SilentChain - $SILENT Token</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0; background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background: #005a87;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #005a87;
+    }
+    .status {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    section {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Welcome to SilentChain</h1>
+  <p>The future of private, decentralized messaging with $SILENT token</p>
+</header>
+
+<main>
+  <button id="connectWalletBtn">Connect Wallet</button>
+  <div id="walletAddress" class="status"></div>
+
+  <section>
+    <h2>Token Stats</h2>
+    <p>Active Users: <span id="activeUsers">Loading...</span></p>
+    <p>$SILENT Price: <span id="tokenPrice">Loading...</span></p>
+  </section>
+
+  <section>
+    <h2>Roadmap</h2>
+    <ul>
+      <li>Launch $SILENT token on Polygon</li>
+      <li>Integrate AdSense revenue backing</li>
+      <li>Enable decentralized storage with IPFS</li>
+      <li>Build community governance model</li>
+      <li>Expand to mobile apps</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  const connectWalletBtn = document.getElementById('connectWalletBtn');
+  const walletAddressDiv = document.getElementById('walletAddress');
+
+  async function connectWallet() {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        walletAddressDiv.textContent = `Connected: ${accounts[0].slice(0,6)}...${accounts[0].slice(-4)}`;
+        connectWalletBtn.style.display = 'none';
+      } catch (error) {
+        walletAddressDiv.textContent = 'Connection rejected.';
+      }
+    } else {
+      walletAddressDiv.textContent = 'MetaMask not detected. Please install MetaMask.';
+    }
+  }
+
+  connectWalletBtn.addEventListener('click', connectWallet);
+
+  // Simulate loading token stats
+  setTimeout(() => {
+    document.getElementById('activeUsers').textContent = '100';
+    document.getElementById('tokenPrice').textContent = '$0.02';
+  }, 1500);
+</script>
+
+</body>
+</html>
